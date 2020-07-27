@@ -18,6 +18,7 @@ namespace vluCanteenAdmin.Models
         public Food1()
         {
             this.Bills = new HashSet<Bill>();
+            this.DailyFoods = new HashSet<DailyFood>();
         }
     
         public int Food_ID { get; set; }
@@ -28,11 +29,12 @@ namespace vluCanteenAdmin.Models
         public Nullable<int> Remain { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
-        public Nullable<int> isToday { get; set; }
+        public bool isToday { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }
         public virtual Category Category1 { get; set; }
-        public virtual DailyFood DailyFood { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DailyFood> DailyFoods { get; set; }
     }
 }

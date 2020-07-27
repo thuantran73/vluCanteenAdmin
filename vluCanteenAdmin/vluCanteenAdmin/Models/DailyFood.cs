@@ -14,16 +14,10 @@ namespace vluCanteenAdmin.Models
     
     public partial class DailyFood
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DailyFood()
-        {
-            this.Food1 = new HashSet<Food1>();
-        }
-    
         public int Dailyfood_ID { get; set; }
         public Nullable<int> Food_ID { get; set; }
+        public Nullable<bool> isToday { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Food1> Food1 { get; set; }
+        public virtual Food1 Food1 { get; set; }
     }
 }

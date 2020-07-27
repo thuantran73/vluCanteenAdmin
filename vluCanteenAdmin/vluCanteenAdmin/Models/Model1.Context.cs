@@ -13,10 +13,10 @@ namespace vluCanteenAdmin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SEP23Team9Entities : DbContext
+    public partial class SEP23Team9Entities1 : DbContext
     {
-        public SEP23Team9Entities()
-            : base("name=SEP23Team9Entities")
+        public SEP23Team9Entities1()
+            : base("name=SEP23Team9Entities1")
         {
         }
     

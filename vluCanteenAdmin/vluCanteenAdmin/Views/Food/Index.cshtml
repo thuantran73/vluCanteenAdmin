@@ -1,0 +1,75 @@
+﻿@model IEnumerable<vluCanteenAdmin.Models.Food1>
+
+@{
+    ViewBag.Title = "VLU Canteen";
+}
+
+<h2>VLU Canteen</h2>
+
+<p>
+    @Html.ActionLink("Thêm món mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên món ăn
+        </th>
+        <th>
+            Giá bán
+        </th>
+        <th>
+            Giá được giảm
+        </th>
+        <th>
+            Số lượng tồn
+        </th>
+        <th>
+            Thông tin món ăn
+        </th>
+        <th>
+            Hình ảnh món ăn
+        </th>
+        <th>
+            Nằm trong memu chính
+        </th>
+        <th>
+            Loại món ăn
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Food_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isToday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category1.Category1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Food_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Food_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Food_ID })
+        </td>
+    </tr>
+}
+
+</table>

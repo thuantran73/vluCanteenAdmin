@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Bill_ID" />
           </Key>
-          <Property Name="Bill_ID" Type="int" Nullable="false" />
+          <Property Name="Bill_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Food_ID" Type="int" />
           <Property Name="User_ID" Type="int" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
@@ -28,8 +28,9 @@
           <Key>
             <PropertyRef Name="Dailyfood_ID" />
           </Key>
-          <Property Name="Dailyfood_ID" Type="int" Nullable="false" />
+          <Property Name="Dailyfood_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Food_ID" Type="int" />
+          <Property Name="isToday" Type="bit" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -46,7 +47,7 @@
           <Key>
             <PropertyRef Name="Food_ID" />
           </Key>
-          <Property Name="Food_ID" Type="int" Nullable="false" />
+          <Property Name="Food_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Food_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Category" Type="int" />
           <Property Name="Discount" Type="int" />
@@ -54,7 +55,7 @@
           <Property Name="Remain" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="Image" Type="nvarchar(max)" />
-          <Property Name="isToday" Type="int" />
+          <Property Name="isToday" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -106,6 +107,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DailyFood_Food1">
+          <End Role="Food1" Type="Self.Food1" Multiplicity="0..1" />
+          <End Role="DailyFood" Type="Self.DailyFood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Food1">
+              <PropertyRef Name="Food_ID" />
+            </Principal>
+            <Dependent Role="DailyFood">
+              <PropertyRef Name="Food_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Feedback_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
@@ -127,18 +140,6 @@
             </Principal>
             <Dependent Role="Food1">
               <PropertyRef Name="Category" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Food1_DailyFood">
-          <End Role="DailyFood" Type="Self.DailyFood" Multiplicity="0..1" />
-          <End Role="Food1" Type="Self.Food1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DailyFood">
-              <PropertyRef Name="Dailyfood_ID" />
-            </Principal>
-            <Dependent Role="Food1">
-              <PropertyRef Name="isToday" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -171,16 +172,16 @@
             <End Role="User" EntitySet="User" />
             <End Role="Bill" EntitySet="Bill" />
           </AssociationSet>
+          <AssociationSet Name="FK_DailyFood_Food1" Association="Self.FK_DailyFood_Food1">
+            <End Role="Food1" EntitySet="Food1" />
+            <End Role="DailyFood" EntitySet="DailyFood" />
+          </AssociationSet>
           <AssociationSet Name="FK_Feedback_User" Association="Self.FK_Feedback_User">
             <End Role="User" EntitySet="User" />
             <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_Food1_Category" Association="Self.FK_Food1_Category">
             <End Role="Category" EntitySet="Category" />
-            <End Role="Food1" EntitySet="Food1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Food1_DailyFood" Association="Self.FK_Food1_DailyFood">
-            <End Role="DailyFood" EntitySet="DailyFood" />
             <End Role="Food1" EntitySet="Food1" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
@@ -197,7 +198,7 @@
           <Key>
             <PropertyRef Name="Bill_ID" />
           </Key>
-          <Property Name="Bill_ID" Type="Int32" Nullable="false" />
+          <Property Name="Bill_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Food_ID" Type="Int32" />
           <Property Name="User_ID" Type="Int32" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
@@ -219,9 +220,10 @@
           <Key>
             <PropertyRef Name="Dailyfood_ID" />
           </Key>
-          <Property Name="Dailyfood_ID" Type="Int32" Nullable="false" />
+          <Property Name="Dailyfood_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Food_ID" Type="Int32" />
-          <NavigationProperty Name="Food1" Relationship="Self.FK_Food1_DailyFood" FromRole="DailyFood" ToRole="Food1" />
+          <Property Name="isToday" Type="Boolean" />
+          <NavigationProperty Name="Food1" Relationship="Self.FK_DailyFood_Food1" FromRole="DailyFood" ToRole="Food1" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -239,7 +241,7 @@
           <Key>
             <PropertyRef Name="Food_ID" />
           </Key>
-          <Property Name="Food_ID" Type="Int32" Nullable="false" />
+          <Property Name="Food_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Food_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Category" Type="Int32" />
           <Property Name="Discount" Type="Int32" />
@@ -247,10 +249,10 @@
           <Property Name="Remain" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isToday" Type="Int32" />
+          <Property Name="isToday" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Bills" Relationship="Self.FK_Bill_Food1" FromRole="Food1" ToRole="Bill" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Food1_Category" FromRole="Food1" ToRole="Category" />
-          <NavigationProperty Name="DailyFood" Relationship="Self.FK_Food1_DailyFood" FromRole="Food1" ToRole="DailyFood" />
+          <NavigationProperty Name="DailyFoods" Relationship="Self.FK_DailyFood_Food1" FromRole="Food1" ToRole="DailyFood" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -318,15 +320,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Food1_DailyFood">
-          <End Role="DailyFood" Type="Self.DailyFood" Multiplicity="0..1" />
-          <End Role="Food1" Type="Self.Food1" Multiplicity="*" />
+        <Association Name="FK_DailyFood_Food1">
+          <End Role="Food1" Type="Self.Food1" Multiplicity="0..1" />
+          <End Role="DailyFood" Type="Self.DailyFood" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DailyFood">
-              <PropertyRef Name="Dailyfood_ID" />
+            <Principal Role="Food1">
+              <PropertyRef Name="Food_ID" />
             </Principal>
-            <Dependent Role="Food1">
-              <PropertyRef Name="isToday" />
+            <Dependent Role="DailyFood">
+              <PropertyRef Name="Food_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -354,7 +356,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SEP23Team9Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SEP23Team9Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bills" EntityType="Self.Bill" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="DailyFoods" EntityType="Self.DailyFood" />
@@ -375,9 +377,9 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Food1" EntitySet="Food1" />
           </AssociationSet>
-          <AssociationSet Name="FK_Food1_DailyFood" Association="Self.FK_Food1_DailyFood">
-            <End Role="DailyFood" EntitySet="DailyFoods" />
+          <AssociationSet Name="FK_DailyFood_Food1" Association="Self.FK_DailyFood_Food1">
             <End Role="Food1" EntitySet="Food1" />
+            <End Role="DailyFood" EntitySet="DailyFoods" />
           </AssociationSet>
           <AssociationSet Name="FK_Feedback_User" Association="Self.FK_Feedback_User">
             <End Role="User" EntitySet="Users" />
@@ -393,7 +395,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SEP23Team9ModelStoreContainer" CdmEntityContainer="SEP23Team9Entities">
+        <EntityContainerMapping StorageEntityContainer="SEP23Team9ModelStoreContainer" CdmEntityContainer="SEP23Team9Entities1">
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="SEP23Team9Model.Bill">
               <MappingFragment StoreEntitySet="Bill">
@@ -420,6 +422,7 @@
               <MappingFragment StoreEntitySet="DailyFood">
                 <ScalarProperty Name="Dailyfood_ID" ColumnName="Dailyfood_ID" />
                 <ScalarProperty Name="Food_ID" ColumnName="Food_ID" />
+                <ScalarProperty Name="isToday" ColumnName="isToday" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
