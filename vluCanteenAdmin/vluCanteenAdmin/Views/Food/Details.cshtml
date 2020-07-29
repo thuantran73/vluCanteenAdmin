@@ -1,17 +1,17 @@
 ﻿@model vluCanteenAdmin.Models.Food1
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết món ăn";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết món ăn</h2>
 
 <div>
-    <h4>Food1</h4>
+    <h4>Món ăn</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Food_Name)
+            Tên món ăn
         </dt>
 
         <dd>
@@ -19,15 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            Giá món ăn
         </dt>
 
         <dd>
@@ -35,7 +27,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Remain)
+            Giảm giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            Số lượng món ăn
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Thông tin món ăn
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
+            Hình ảnh món ăn
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isToday)
+            Nằm trong menu chính
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category1.Category1)
+            Loại món ăn
         </dt>
 
         <dd>
