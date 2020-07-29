@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Razor.Parser;
 using vluCanteenAdmin.Models;
 
 namespace vluCanteenAdmin.Controllers
@@ -48,15 +51,32 @@ namespace vluCanteenAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Food_ID,Food_Name,Category,Discount,Price,Remain,Description,Image,isToday")] Food1 food1)
+        public ActionResult Create([Bind(Include = "Food_ID,Food_Name,Category,Discount,Price,Remain,Description,Image,isToday")] Food1 food1,
+            FormCollection fc, HttpPostedFileBase file)
         {
+
+            Food1 img = new Food1();
+            var allowedExtensions = new[] { ".jpg", ".png", "jpeg" };
+            img.Image = file.ToString();
+            var fileName = Path.GetFileName(file.FileName);
+            var ext = Path.GetExtension(file.FileName);
+
+            if (allowedExtensions.Contains(ext))
+            {
+                string name = Path.GetFileNameWithoutExtension(fileName);
+                var path = Path.Combine(Server.MapPath("~/Images"));
+                img.Image = path;
+                db.Food1.Add(img);
+                db.SaveChanges();
+                file.SaveAs(path);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Food1.Add(food1);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.Category = new SelectList(db.Categories, "Category_ID", "Category1", food1.Category);
             return View(food1);
         }
