@@ -12,12 +12,12 @@ namespace vluCanteenAdmin.Controllers
 {
     public class BillsController : Controller
     {
-        private SEP23Team9Entities1 db = new SEP23Team9Entities1();
+        private SEP23Team9Entities db = new SEP23Team9Entities();
 
         // GET: Bills
         public ActionResult Index()
         {
-            var bills = db.Bills.Include(b => b.Food1).Include(b => b.User);
+            var bills = db.Bills.Include(b => b.User);
             return View(bills.ToList());
         }
 
@@ -39,7 +39,6 @@ namespace vluCanteenAdmin.Controllers
         // GET: Bills/Create
         public ActionResult Create()
         {
-            ViewBag.Food_ID = new SelectList(db.Food1, "Food_ID", "Food_Name");
             ViewBag.User_ID = new SelectList(db.Users, "User_ID", "Email");
             return View();
         }
@@ -58,7 +57,6 @@ namespace vluCanteenAdmin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Food_ID = new SelectList(db.Food1, "Food_ID", "Food_Name", bill.Food_ID);
             ViewBag.User_ID = new SelectList(db.Users, "User_ID", "Email", bill.User_ID);
             return View(bill);
         }
@@ -75,7 +73,6 @@ namespace vluCanteenAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Food_ID = new SelectList(db.Food1, "Food_ID", "Food_Name", bill.Food_ID);
             ViewBag.User_ID = new SelectList(db.Users, "User_ID", "Email", bill.User_ID);
             return View(bill);
         }
@@ -93,7 +90,6 @@ namespace vluCanteenAdmin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Food_ID = new SelectList(db.Food1, "Food_ID", "Food_Name", bill.Food_ID);
             ViewBag.User_ID = new SelectList(db.Users, "User_ID", "Email", bill.User_ID);
             return View(bill);
         }

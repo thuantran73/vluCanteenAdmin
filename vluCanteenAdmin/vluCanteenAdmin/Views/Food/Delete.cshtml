@@ -12,31 +12,31 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Tên món ăn
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Food_Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
-            Giá món ăn
+            @Html.DisplayNameFor(model => model.Discount)
         </dt>
 
         <dd>
-            @String.Format("{0:n0}", Model.Price)
+            @Html.DisplayFor(model => model.Discount)
         </dd>
 
         <dt>
-            Giảm giá
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
 
         <dd>
-            @String.Format("{0:n0}", Model.Discount)
+            @Html.DisplayFor(model => model.Price)
         </dd>
 
         <dt>
-            Số lượng món ăn
+            @Html.DisplayNameFor(model => model.Remain)
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            Thông tin món ăn
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            Hình ảnh món ăn
+            @Html.DisplayNameFor(model => model.Image)
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            Nằm trong menu chính
+            @Html.DisplayNameFor(model => model.isToday)
         </dt>
 
         <dd>
@@ -68,11 +68,19 @@
         </dd>
 
         <dt>
-            Loại món ăn
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category1.Category1)
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Category_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Category_Name)
         </dd>
 
     </dl>
@@ -81,8 +89,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-default" /> |
-            @Html.ActionLink("Quay về trang chính", "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

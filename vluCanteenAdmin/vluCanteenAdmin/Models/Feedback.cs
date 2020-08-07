@@ -16,7 +16,6 @@ namespace vluCanteenAdmin.Models
     {
         public int Feedback_ID { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public string Feedback_Meal { get; set; }
         public string Note { get; set; }
         public Nullable<int> User_ID { get; set; }
         public Nullable<int> Rate { get; set; }

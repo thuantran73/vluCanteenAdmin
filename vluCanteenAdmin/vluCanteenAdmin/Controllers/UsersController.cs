@@ -12,13 +12,12 @@ namespace vluCanteenAdmin.Controllers
 {
     public class UsersController : Controller
     {
-        private SEP23Team9Entities1 db = new SEP23Team9Entities1();
+        private SEP23Team9Entities db = new SEP23Team9Entities();
 
         // GET: Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.UserType);
-            return View(users.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
@@ -39,7 +38,6 @@ namespace vluCanteenAdmin.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.Type_ID = new SelectList(db.UserTypes, "Type_ID", "User_Type");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace vluCanteenAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "User_ID,Email,Name,Type_ID")] User user)
+        public ActionResult Create([Bind(Include = "User_ID,Email,Name,Role,LastAccess")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace vluCanteenAdmin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Type_ID = new SelectList(db.UserTypes, "Type_ID", "User_Type", user.Type_ID);
             return View(user);
         }
 
@@ -73,7 +70,6 @@ namespace vluCanteenAdmin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Type_ID = new SelectList(db.UserTypes, "Type_ID", "User_Type", user.Type_ID);
             return View(user);
         }
 
@@ -82,7 +78,7 @@ namespace vluCanteenAdmin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "User_ID,Email,Name,Type_ID")] User user)
+        public ActionResult Edit([Bind(Include = "User_ID,Email,Name,Role,LastAccess")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace vluCanteenAdmin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Type_ID = new SelectList(db.UserTypes, "Type_ID", "User_Type", user.Type_ID);
             return View(user);
         }
 

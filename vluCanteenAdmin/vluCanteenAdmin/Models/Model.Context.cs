@@ -13,10 +13,10 @@ namespace vluCanteenAdmin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SEP23Team9Entities1 : DbContext
+    public partial class SEP23Team9Entities : DbContext
     {
-        public SEP23Team9Entities1()
-            : base("name=SEP23Team9Entities1")
+        public SEP23Team9Entities()
+            : base("name=SEP23Team9Entities")
         {
         }
     
@@ -27,11 +27,10 @@ namespace vluCanteenAdmin.Models
     
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<DailyFood> DailyFoods { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Food1> Food1 { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserType> UserTypes { get; set; }
+        public virtual DbSet<BillDetail> BillDetails { get; set; }
     }
 }

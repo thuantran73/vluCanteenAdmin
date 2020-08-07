@@ -1,39 +1,42 @@
 ﻿@model IEnumerable<vluCanteenAdmin.Models.Food1>
 
 @{
-    ViewBag.Title = "VLU Canteen";
+    ViewBag.Title = "Index";
 }
 
-<h2>VLU Canteen</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Thêm món mới", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            Tên món ăn
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            Giá bán
+            @Html.DisplayNameFor(model => model.Discount)
         </th>
         <th>
-            Giá được giảm
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            Số lượng tồn
+            @Html.DisplayNameFor(model => model.Remain)
         </th>
         <th>
-            Thông tin món ăn
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            Hình ảnh món ăn
+            @Html.DisplayNameFor(model => model.Image)
         </th>
         <th>
-            Nằm trong memu chính
+            @Html.DisplayNameFor(model => model.isToday)
         </th>
         <th>
-            Loại món ăn
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Category_Name)
         </th>
         <th></th>
     </tr>
@@ -41,13 +44,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Food_Name)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @String.Format("{0:n0}", item.Price)
+            @Html.DisplayFor(modelItem => item.Discount)
         </td>
         <td>
-            @String.Format("{0:n0}", item.Discount)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Remain)
@@ -62,7 +65,10 @@
             @Html.DisplayFor(modelItem => item.isToday)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category1.Category1)
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Category_Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Food_ID }) |

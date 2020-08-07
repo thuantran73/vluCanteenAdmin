@@ -12,18 +12,13 @@ namespace vluCanteenAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserType
+    public partial class BillDetail
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserType()
-        {
-            this.Users = new HashSet<User>();
-        }
+        public int Quantity { get; set; }
+        public int Bill_ID { get; set; }
+        public int Food_ID { get; set; }
     
-        public int Type_ID { get; set; }
-        public string User_Type { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual Bill Bill { get; set; }
+        public virtual Food1 Food1 { get; set; }
     }
 }
